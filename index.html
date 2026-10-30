@@ -9,94 +9,99 @@
 <style>
 :root {
   --ink: #05070f;
-  --panel: rgba(10, 16, 32, 0.75);
-  --panel-border: rgba(40, 240, 255, 0.25);
+  --panel: rgba(8, 14, 30, 0.94);
+  --panel-border: rgba(40, 240, 255, 0.35);
   --cy: #28f0ff;
   --mg: #ff2fa6;
   --gd: #ffc93c;
   --tx: #eaf6ff;
   --dim: #7d93ad;
-  --radius: 12px;
+  --radius: 16px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; touch-action: none; }
 html, body { height: 100%; height: 100dvh; overflow: hidden; background: var(--ink); color: var(--tx); font: 500 15px "Chakra Petch", system-ui, sans-serif; }
 [hidden] { display: none !important; }
 canvas { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
 
 #ui, #ov {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
 }
-#ui { background: radial-gradient(circle at center, rgba(5,7,15,0.4) 0%, rgba(5,7,15,0.88) 100%); }
-#ov { background: rgba(5, 7, 15, 0.82); backdrop-filter: blur(8px); z-index: 10; }
+#ui { background: radial-gradient(circle at center, rgba(5,7,15,0.5) 0%, rgba(5,7,15,0.95) 100%); }
+#ov { background: rgba(5, 7, 15, 0.88); backdrop-filter: blur(10px); z-index: 10; }
 
 .win, .box {
   display: flex; flex-direction: column; background: var(--panel);
   border: 1px solid var(--panel-border);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(40, 240, 255, 0.08);
-  backdrop-filter: blur(12px); border-radius: var(--radius); overflow: hidden; max-height: 100%;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(40, 240, 255, 0.12);
+  backdrop-filter: blur(16px); border-radius: var(--radius); overflow: hidden; max-height: 100%;
 }
-.win { width: min(860px, 100%); height: min(580px, 100%); }
-.box { width: min(400px, 100%); padding: 24px; gap: 16px; text-align: center; }
+.win { width: min(900px, 100%); height: min(580px, 100%); }
+.box { width: min(420px, 100%); padding: 26px; gap: 16px; text-align: center; }
 
-.hd { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 20px 24px 12px; }
-h1 { font-size: clamp(24px, 4.5vw, 38px); letter-spacing: 0.12em; font-weight: 700; color: #ffffff; text-shadow: 0 0 12px rgba(40, 240, 255, 0.4); line-height: 1; }
-.sub { color: var(--dim); font-size: 13px; margin-top: 4px; font-weight: 400; }
-.chip { background: rgba(255, 201, 60, 0.08); border: 1px solid rgba(255, 201, 60, 0.4); color: var(--gd); padding: 6px 16px; border-radius: 99px; font-weight: 700; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px; }
+.hd { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 20px 24px 12px; border-bottom: 1px solid rgba(40,240,255,0.1); }
+h1 { font-size: clamp(22px, 4.5vw, 32px); letter-spacing: 0.14em; font-weight: 700; color: #ffffff; text-shadow: 0 0 14px rgba(40, 240, 255, 0.5); line-height: 1; }
+.sub { color: var(--dim); font-size: 12px; margin-top: 4px; font-weight: 400; letter-spacing: 0.05em; }
+.chip { background: rgba(255, 201, 60, 0.1); border: 1px solid rgba(255, 201, 60, 0.5); color: var(--gd); padding: 6px 16px; border-radius: 99px; font-weight: 700; letter-spacing: 0.06em; font-size: 14px; box-shadow: 0 0 12px rgba(255,201,60,0.15); }
 
-.tabs { display: flex; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 0 16px; gap: 8px; }
-.tabs button { background: none; border: 0; border-bottom: 2px solid transparent; color: var(--dim); font: 600 14px inherit; padding: 12px 14px; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.05em; }
+.tabs { display: flex; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding: 0 20px; gap: 6px; background: rgba(0,0,0,0.2); }
+.tabs button { background: none; border: 0; border-bottom: 2px solid transparent; color: var(--dim); font: 600 14px inherit; padding: 12px 16px; cursor: pointer; transition: all 0.2s; text-transform: uppercase; letter-spacing: 0.06em; }
 .tabs button:hover { color: var(--tx); }
-.tabs button.on { color: var(--cy); border-color: var(--cy); text-shadow: 0 0 8px rgba(40, 240, 255, 0.4); }
+.tabs button.on { color: var(--cy); border-color: var(--cy); text-shadow: 0 0 10px rgba(40, 240, 255, 0.5); }
 
-.body { flex: 1; overflow-y: auto; padding: 20px 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; align-content: start; }
-.ft { display: flex; gap: 10px; padding: 12px 24px; background: rgba(5, 7, 15, 0.4); border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.body { flex: 1; overflow-y: auto; padding: 18px 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; align-content: start; }
+.ft { display: flex; gap: 12px; padding: 14px 24px; background: rgba(3, 5, 10, 0.6); border-top: 1px solid rgba(40,240,255,0.15); }
 
-.card { border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: rgba(5, 7, 15, 0.4); transition: border-color 0.2s, transform 0.15s; }
-.card:hover:not(.lock) { border-color: rgba(40, 240, 255, 0.4); transform: translateY(-2px); }
-.card.lock { opacity: 0.45; }
-.card small { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
-.card h3 { font-size: 17px; font-weight: 700; }
+.card { border: 1px solid rgba(40, 240, 255, 0.2); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: rgba(10, 18, 38, 0.5); transition: all 0.2s; }
+.card:hover:not(.lock) { border-color: rgba(40, 240, 255, 0.6); box-shadow: 0 0 16px rgba(40,240,255,0.15); }
+.card.lock { opacity: 0.4; }
+.card small { color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; }
+.card h3 { font-size: 17px; font-weight: 700; color: #fff; }
 .card p { color: var(--dim); font-size: 12px; line-height: 1.4; }
 
-.st { color: var(--gd); letter-spacing: 0.15em; font-size: 16px; }
-.btn { font: 700 13px inherit; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tx); background: rgba(40, 240, 255, 0.08); border: 1px solid var(--cy); border-radius: 6px; padding: 10px 16px; cursor: pointer; transition: all 0.15s; }
-.btn:hover:not(:disabled) { background: rgba(40, 240, 255, 0.25); box-shadow: 0 0 16px rgba(40, 240, 255, 0.3); transform: translateY(-1px); }
-.btn.mg { border-color: var(--mg); background: rgba(255, 47, 166, 0.1); color: #fff; }
-.btn.mg:hover:not(:disabled) { background: rgba(255, 47, 166, 0.28); box-shadow: 0 0 16px rgba(255, 47, 166, 0.35); }
+.st { color: var(--gd); letter-spacing: 0.2em; font-size: 16px; text-shadow: 0 0 8px rgba(255,201,60,0.3); }
+.btn { font: 700 13px inherit; text-transform: uppercase; letter-spacing: 0.08em; color: var(--tx); background: rgba(40, 240, 255, 0.12); border: 1px solid var(--cy); border-radius: 8px; padding: 10px 16px; cursor: pointer; transition: all 0.15s; }
+.btn:hover:not(:disabled) { background: rgba(40, 240, 255, 0.28); box-shadow: 0 0 18px rgba(40, 240, 255, 0.4); }
+.btn.mg { border-color: var(--mg); background: rgba(255, 47, 166, 0.15); color: #fff; }
+.btn.mg:hover:not(:disabled) { background: rgba(255, 47, 166, 0.35); box-shadow: 0 0 18px rgba(255, 47, 166, 0.45); }
 .btn:disabled { opacity: 0.35; cursor: not-allowed; border-color: var(--dim); color: var(--dim); }
 
-.pips { display: flex; gap: 4px; margin-top: 2px; }
-.pips i { flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.1); }
-.pips i.f { background: var(--cy); box-shadow: 0 0 6px var(--cy); }
+.pips { display: flex; gap: 5px; margin-top: 2px; }
+.pips i { flex: 1; height: 5px; border-radius: 3px; background: rgba(255,255,255,0.1); }
+.pips i.f { background: var(--cy); box-shadow: 0 0 8px var(--cy); }
 
-.row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-size: 14px; }
+.row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.06); font-size: 14px; }
 .row b { color: var(--cy); }
 .big { font-size: 28px; font-weight: 700; letter-spacing: 0.06em; }
 
-#pz { position: absolute; top: calc(12px + env(safe-area-inset-top)); right: calc(16px + env(safe-area-inset-right)); padding: 8px 16px; z-index: 5; }
-#touch { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 12px max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); pointer-events: none; z-index: 5; }
-#touch div { display: flex; gap: 10px; pointer-events: auto; }
-#touch button { touch-action: none; width: 62px; height: 62px; border-radius: 50%; background: rgba(10, 16, 32, 0.75); border: 1.5px solid var(--cy); color: var(--cy); font: 700 12px inherit; backdrop-filter: blur(4px); box-shadow: 0 4px 12px rgba(0,0,0,0.4); text-transform: uppercase; }
-#touch button:active { background: rgba(40, 240, 255, 0.3); transform: scale(0.95); }
+#pz { position: absolute; top: calc(14px + env(safe-area-inset-top)); right: calc(16px + env(safe-area-inset-right)); padding: 8px 16px; z-index: 5; }
+
+/* Ultra-Responsive Mobile Touch Controls */
+#touch { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: flex-end; padding: 16px max(18px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left)); pointer-events: none; z-index: 5; }
+#touch .pad-left { display: flex; gap: 14px; pointer-events: auto; }
+#touch .pad-right { display: flex; gap: 14px; align-items: flex-end; pointer-events: auto; }
+#touch button { touch-action: none; width: 70px; height: 70px; border-radius: 50%; background: rgba(10, 18, 38, 0.85); border: 2px solid var(--cy); color: var(--cy); font: 700 14px inherit; backdrop-filter: blur(8px); box-shadow: 0 8px 20px rgba(0,0,0,0.6); text-transform: uppercase; display: flex; align-items: center; justify-content: center; }
+#touch button:active, #touch button.pressed { background: rgba(40, 240, 255, 0.4); transform: scale(0.9); box-shadow: 0 2px 10px rgba(40,240,255,0.5); }
+#touch button[data-k="j"] { width: 76px; height: 76px; border-color: var(--mg); color: var(--mg); box-shadow: 0 8px 20px rgba(255,47,166,0.3); }
+#touch button[data-k="j"]:active, #touch button[data-k="j"].pressed { background: rgba(255, 47, 166, 0.4); }
 
 #rot { position: absolute; inset: 0; background: var(--ink); display: none; align-items: center; justify-content: center; text-align: center; padding: 30px; z-index: 99; color: var(--cy); font-size: 18px; }
 @media (orientation:portrait) and (pointer:coarse) { #rot { display: flex; } }
 @media (max-height: 520px) {
-  #ui { padding: 8px; }
+  #ui { padding: 6px; }
   .win { height: 100%; }
-  .hd { padding: 10px 16px 6px; }
-  h1 { font-size: 22px; }
-  .tabs button { padding: 8px 10px; font-size: 12px; }
-  .body { padding: 10px 16px; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .hd { padding: 10px 18px 8px; }
+  h1 { font-size: 20px; }
+  .tabs button { padding: 8px 12px; font-size: 12px; }
+  .body { padding: 10px 18px; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
   .card { padding: 10px; gap: 4px; }
 }
 </style></head><body>
 <canvas id="c"></canvas>
 <button id="pz" class="btn" hidden aria-label="Pause">Pause</button>
 <div id="touch" hidden>
-  <div><button data-k="l">◀</button><button data-k="r">▶</button></div>
-  <div><button data-k="d">Slide</button><button data-k="x">Dash</button><button data-k="j">Jump</button></div>
+  <div class="pad-left"><button data-k="l">◀</button><button data-k="r">▶</button></div>
+  <div class="pad-right"><button data-k="d">Slide</button><button data-k="x">Dash</button><button data-k="j">Jump</button></div>
 </div>
 <div id="ui"></div><div id="ov" hidden></div>
 <div id="rot">Rotate your device to landscape to play.</div>
@@ -124,8 +129,8 @@ const UP={
 };
 
 /* ---------- save ---------- */
-let S={crystals:0,unlocked:1,skin:'cy',skins:['cy'],up:{},best:{},sound:true,music:true,tab:'sec'};
-try{const r=localStorage.getItem('SW4');if(r)Object.assign(S,JSON.parse(r));else{const o=JSON.parse(localStorage.getItem('SHADOW_WALKER_SAVE_V3')||'null');if(o){S.crystals=o.crystals||0;S.unlocked=o.unlockedSectors||1}}}catch(e){}
+let S={crystals:70,unlocked:1,skin:'cy',skins:['cy'],up:{},best:{},sound:true,music:true,tab:'sec'};
+try{const r=localStorage.getItem('SW4');if(r)Object.assign(S,JSON.parse(r));else{const o=JSON.parse(localStorage.getItem('SHADOW_WALKER_SAVE_V3')||'null');if(o){S.crystals=o.crystals||70;S.unlocked=o.unlockedSectors||1}}}catch(e){}
 const save=()=>{try{localStorage.setItem('SW4',JSON.stringify(S))}catch(e){}};
 const skin=()=>SKINS.find(k=>k.id==S.skin)||SKINS[0], ul=k=>S.up[k]||0, fmt=t=>String(t/60|0).padStart(2,'0')+':'+String(t%60|0).padStart(2,'0');
 
@@ -154,7 +159,7 @@ function inPoly(x,y,v){let r=0;for(let i=0,j=v.length-1;i<v.length;j=i++){const[
 
 /* ---------- input ---------- */
 const I={l:0,r:0,d:0},KM={KeyA:'l',ArrowLeft:'l',KeyD:'r',ArrowRight:'r',KeyS:'d',ArrowDown:'d'},JK=['KeyW','Space','ArrowUp'];
-const press=()=>{if(G.st=='play')P.buf=8},rel=()=>{if(P.vy<-4)P.vy*=.55};
+const press=()=>{if(G.st=='play')P.buf=12},rel=()=>{if(P.vy<-4)P.vy*=.5};
 
 addEventListener('keydown',e=>{
   A();if(e.repeat)return;
@@ -166,20 +171,23 @@ addEventListener('keydown',e=>{
 });
 addEventListener('keyup',e=>{if(KM[e.code])I[KM[e.code]]=0;if(JK.includes(e.code))rel()});
 
-/* Touch Controls Fix */
+/* Zero-Latency Instant Mobile Touch Handlers */
 document.querySelectorAll('#touch button').forEach(b=>{
   const k=b.dataset.k;
   const handleDown=(e)=>{
-    e.preventDefault(); e.stopPropagation(); A();
+    e.preventDefault(); e.stopPropagation(); A(); b.classList.add('pressed');
     if(k=='j') press();
     else if(k=='x') dashReq=1;
     else I[k]=1;
   };
   const handleUp=(e)=>{
-    e.preventDefault(); e.stopPropagation();
+    e.preventDefault(); e.stopPropagation(); b.classList.remove('pressed');
     if(k=='j') rel();
     else if(k!='x') I[k]=0;
   };
+  b.addEventListener('touchstart', handleDown, {passive: false});
+  b.addEventListener('touchend', handleUp, {passive: false});
+  b.addEventListener('touchcancel', handleUp, {passive: false});
   b.addEventListener('pointerdown', handleDown, {passive: false});
   b.addEventListener('pointerup', handleUp, {passive: false});
   b.addEventListener('pointercancel', handleUp, {passive: false});
@@ -218,16 +226,16 @@ function phys(){
     else if(P.j>0&&!P.gr){P.j--;P.buf=0;jump()}
   }
 
-  if(P.dash){P.vx=P.f*(14+sp*.8);P.vy=0;P.dash--}else P.vy+=.58;
+  if(P.dash){P.vx=P.f*(14+sp*.8);P.vy=0;P.dash--}else P.vy+=.56;
 
   P.x+=P.vx;for(const q of PL)if(hit(P,q)){P.x=P.vx>0?q.x-P.w:q.x+q.w;P.vx=0}
   P.y+=P.vy;P.gr=0;for(const q of PL)if(hit(P,q)){if(P.vy>0){P.y=q.y-P.h;P.gr=1;if(P.vy>7)burst(P.x+10,P.y+P.h,'#7d93ad',3)}else P.y=q.y+q.h;P.vy=0}
   
-  if(P.gr){P.coy=6;P.j=2}else if(P.coy>0&&--P.coy==0&&P.j==2)P.j=1;
+  if(P.gr){P.coy=8;P.j=2}else if(P.coy>0&&--P.coy==0&&P.j==2)P.j=1;
   P.tr.unshift({x:P.x,y:P.y,w:P.w,h:P.h});P.tr.length=Math.min(P.tr.length,5);
 }
 
-function jump(){P.vy=-11.2;tone(200,500,.12,'triangle',.18);burst(P.x+10,P.y+P.h,skin().c,5)}
+function jump(){P.vy=-11.4;tone(220,520,.12,'triangle',.18);burst(P.x+10,P.y+P.h,skin().c,5)}
 
 function update(){
   if(G.st=='menu'||G.st=='end'){G.la+=.01;G.lx=W/2+Math.sin(G.la)*W*.38;shadows();return}
@@ -354,17 +362,17 @@ function menu(){
   const sy=$('#ui .body')?.scrollTop||0;
   $('#ui').innerHTML=`<div class="win">
     <div class="hd">
-      <div><h1>SHADOW WALKER</h1><div class="sub">Tactical Stealth Platformer</div></div>
+      <div><h1>SHADOW WALKER</h1><div class="sub">v1.0 • ALONE DEV</div></div>
       <div class="chip">◆ ${S.crystals}</div>
     </div>
     <div class="tabs">
-      ${[['sec','Sectors'],['up','Upgrades'],['skin','Skins'],['help','Controls']].map(([k,n])=>`<button class="${t==k?'on':''}" data-a="tab" data-k="${k}">${n}</button>`).join('')}
+      ${[['sec','Sectors'],['up','Upgrades'],['skin','Skins'],['help','How to play']].map(([k,n])=>`<button class="${t==k?'on':''}" data-a="tab" data-k="${k}">${n}</button>`).join('')}
     </div>
     <div class="body">${b}</div>
     <div class="ft">
-      <button class="btn" data-a="snd">Sound: ${S.sound?'ON':'OFF'}</button>
-      <button class="btn" data-a="mus">Music: ${S.music?'ON':'OFF'}</button>
-      <button class="btn" data-a="fs">Fullscreen</button>
+      <button class="btn" data-a="snd">Sound: ${S.sound?'on':'off'}</button>
+      <button class="btn" data-a="mus">Music: ${S.music?'on':'off'}</button>
+      <button class="btn" data-a="fs">Full screen</button>
     </div>
   </div>`;
   const bd=$('#ui .body');if(bd)bd.scrollTop=sy;
