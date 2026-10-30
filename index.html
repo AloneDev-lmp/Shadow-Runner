@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<!DOCTYPE html><html lang="en"><head ><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#05070f"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Shadow Walker</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&display=swap">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<meta name="description" content="Stay in the dark. Slide, dash and jump through the shadows.">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&display=swap">
 <style>
 :root{--ink:#05070f;--cy:#28f0ff;--mg:#ff2fa6;--gd:#ffc93c;--tx:#dff6ff;--dim:#7d93ad}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
@@ -176,4 +179,6 @@ document.addEventListener('visibilitychange',()=>document.hidden&&pause(1));
 let last=performance.now(),acc=0;
 function loop(n){acc+=Math.min(100,n-last);last=n;while(acc>=1000/60){update();acc-=1000/60}draw();requestAnimationFrame(loop)}
 toMenu();requestAnimationFrame(loop);
-</script></body></html>
+</script>
+<script src="pro.js"></script>
+</body></html>
